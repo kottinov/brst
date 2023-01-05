@@ -9,4 +9,9 @@ export class DronesController {
   async getDrones(): Promise<any> {
     return await this.dronesService.getDrones();
   }
+
+  @Get('/violating')
+  async getViolatingDrones(): Promise<any[]> {
+    return await this.dronesService.getViolatingDrones();
+  }
 }
