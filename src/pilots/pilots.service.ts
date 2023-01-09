@@ -1,12 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import axios from 'axios';
-import * as NodeCache from 'node-cache';
+import NodeCache from 'node-cache';
+
 @Injectable()
 export class PilotsService {
-  cache = new NodeCache({
-    stdTTL: 600, // 10 minutes
-    checkperiod: 120, // 2 minutes
-  });
+  private cache: NodeCache;
+
+  constructor() {
+    this.cache = new NodeCache({
+      stdTTL: 600, // 10 minutes
+      checkperiod: 120, // 2 minutes
+    });
+  }
 
   async getPilot(serialNumber: string): Promise<any> {
     const pilot = this.cache.get(serialNumber);
