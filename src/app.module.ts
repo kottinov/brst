@@ -6,7 +6,7 @@ import { DronesController } from './drones/drones.controller';
 import { PilotsService } from './pilots/pilots.service';
 import { PilotsController } from './pilots/pilots.controller';
 import { CorsOptions } from 'cors';
-import cors from 'cors';
+import * as cors from 'cors';
 
 const corsOptions: CorsOptions = {
   origin: '*',

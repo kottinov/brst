@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import axios from 'axios';
-import NodeCache from 'node-cache';
+import * as NodeCache from 'node-cache';
 
 @Injectable()
 export class PilotsService {
