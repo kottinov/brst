@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+  CacheModule,
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DronesService } from './drones/drones.service';
@@ -15,7 +20,12 @@ const corsOptions: CorsOptions = {
 };
 
 @Module({
-  imports: [],
+  imports: [
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 600,
+    }),
+  ],
   controllers: [AppController, DronesController, PilotsController],
   providers: [AppService, DronesService, PilotsService],
 })
