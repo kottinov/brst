@@ -1,4 +1,5 @@
 import {
+  CacheInterceptor,
   CacheModule,
   MiddlewareConsumer,
   Module,
@@ -12,6 +13,7 @@ import { PilotsService } from './pilots/pilots.service';
 import { PilotsController } from './pilots/pilots.controller';
 import { CorsOptions } from 'cors';
 import * as cors from 'cors';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 const corsOptions: CorsOptions = {
   origin: '*',
@@ -27,7 +29,19 @@ const corsOptions: CorsOptions = {
     }),
   ],
   controllers: [AppController, DronesController, PilotsController],
-  providers: [AppService, DronesService, PilotsService],
+  providers: [
+    AppService,
+    DronesService,
+    PilotsService,
+    {
+      provide: 'CORS_OPTIONS',
+      useValue: corsOptions,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
