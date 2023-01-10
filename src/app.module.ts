@@ -12,7 +12,7 @@ import { DronesController } from './drones/drones.controller';
 import { PilotsService } from './pilots/pilots.service';
 import { PilotsController } from './pilots/pilots.controller';
 import { CorsOptions } from 'cors';
-import * as corsModule from 'cors';
+import cors from 'cors';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
 const corsOptions: CorsOptions = {
@@ -45,6 +45,6 @@ const corsOptions: CorsOptions = {
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(corsModule(corsOptions)).forRoutes('*');
+    consumer.apply(cors()).forRoutes('*');
   }
 }
